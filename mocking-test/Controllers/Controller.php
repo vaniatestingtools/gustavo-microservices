@@ -2,9 +2,11 @@
 
     namespace SAC_WebAPI\Controllers;
 
+	use SAC_WebAPI\Exceptions\InvalidTicketException;
     use SAC_WebAPI\Model\Ticket;
     use SAC_WebAPI\DataAccess\DataAccess;
 
+    include_once './Exceptions/InvalidTicketException.php';
     include_once './Models/Ticket.php';
     include_once './DataAccess/DataAccess.php';
 
@@ -21,24 +23,67 @@
             $ticket->nome = $nomeDoUsuario;
             $ticket->email = $email;
             $ticket->telefone = $telefone;
+	    	$ticket->telefone = preg_replace("/[^0-9]/", "", $ticket->telefone); // Testar com telefone nulo
             $ticket->mensagem = $mensagem;
             $ticket->assunto = $assunto;
 
-            return $this->dataAccess->abrirTicket($ticket);
-        }
+			try{
+				$this->validaTicket($ticket);
+			}catch(InvalidTicketException $e){
+				$exception = new InvalidTicketException();
+				$exception->setData($e->getData());
+				throw $exception;
+				return;
+			}
 
-        public function getTodosTickets(){
-            return $this->dataAccess->getTodosTickets();
+			$this->dataAccess->abrirTicket($ticket);
         }
+		
+		public function getTodosTickets(){
+			$fetch = $this->dataAccess->getTickets();
+			
+			$resp = [];
 
-        public function fecharTicket($id){
-            return $this->dataAccess->fecharTicket($id);
-        }
+			foreach($fetch as $key => $line){
+				$info["id"] = $line[0];
+				$info["name"] = $line[1];
+				$info["email"] = $line[2];
+				$info["phone"] = (int) $line[3];
+				$info["message"] = $line[4];
+				$info["status"] = (int) $line[5];
+				$info["subject"] = $line[6];
+				$resp[] = $info;
+			}
 
-        public function excluirTicket($id){
-            return $this->dataAccess->excluirTicket($id);
-        }
-    }
+			return $resp;
+		}
 
+		public function validaTicket($ticket){
+			$valid = [];
+			
+			if($ticket->nome == null){
+				$valid["name"] = "invalid name";
+			}
+			if($ticket->email == null){
+				$valid["email"] = "invalid email";
+			}
+			if($ticket->telefone == null){
+				$valid["phone"] = "invalid phone";
+			}
+			if($ticket->mensagem == null){
+				$valid["message"] = "invalid message";
+			}
+			if($ticket->assunto == null){
+				$valid["subject"] = "invalid subject";
+			}
+
+			if(!empty($valid)){
+				$valid["invalidField"] = "null field not supported";
+				$exception = new InvalidTicketException();
+				$exception->setData($valid);
+				throw $exception;
+			}
+		}
+	}
 
 ?>

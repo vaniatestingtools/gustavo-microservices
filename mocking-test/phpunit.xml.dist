@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+	<logging>
+		<log type="coverage-php" target="build/cov/coverage.cov"/>
+		<log type="coverage-clover" target="build/logs/clover.xml"/>
+	</logging>
+	<filter>
+	  <whitelist processUncoveredFilesFromWhitelist="true">
+	    <file>DataAccess/DataAccessTest.php</file>
+	  </whitelist>
+	</filter>
+
+</phpunit>

@@ -1,0 +1,16 @@
+{
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "DataAccess"
+        ]
+    },
+    "logs": {
+        "text": "infection.log",
+        "summary": "summary.log"
+    },
+    "mutators": {
+        "@default": true,
+        "@function_signature": false
+    }
+}

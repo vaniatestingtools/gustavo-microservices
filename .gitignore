@@ -1,1 +1,5 @@
 mocking-test/vendor
+mocking-test/.phpunit.result.cache
+mocking-test/build
+mocking-test/infection.log
+mocking-test/summary.log
