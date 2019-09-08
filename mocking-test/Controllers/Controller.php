@@ -39,6 +39,9 @@
 			$this->dataAccess->abrirTicket($ticket);
         }
 		
+		/**
+         * @codeCoverageIgnore
+        */
 		public function getTodosTickets(){
 			$fetch = $this->dataAccess->getTickets();
 			
@@ -57,8 +60,11 @@
 
 			return $resp;
 		}
-
-		public function validaTicket($ticket){
+		
+        /**
+         * @codeCoverageIgnore
+        */
+		private function validaTicket($ticket){
 			$valid = [];
 			
 			if($ticket->nome == null){

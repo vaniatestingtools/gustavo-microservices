@@ -10,14 +10,11 @@ class DataAccessTest extends TestCase{
         Mockery::close();
     }
 
-    public function testConnection(){
+    public function testAbrirTicket(){
         $dataAccess = new DataAccess();
         $mock = Mockery::mock(\mysqli::class);
-        // $mock->set($connect_errno, true);
-        // $mock->set($connet_error, "error");
-        //$this->expectException(\Exception::class);
         $dataAccess->connect($mock);
-        $this->assertNull($dataAccess->host);
+        $dataAccess->connect($mock);
     }
 
     // public function testAbrirTicket(){

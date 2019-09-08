@@ -17,6 +17,9 @@
         function __construct(){
         }
 
+        /**
+         * @codeCoverageIgnore
+        */
         public function connect(\mysqli $mysqli = null){
             if(!$mysqli){
                 $this->host = $_ENV["SAC_DB_HOST"];
@@ -54,7 +57,9 @@
             $stmt->close();
 
         }
-
+        /**
+         * @codeCoverageIgnore
+         */
         public function getTodosTickets(){
             $sql = "SELECT
                         ticket_id TicketId,
@@ -79,7 +84,9 @@
             $this->conn->close();
             return $result;
         }
-
+        /**
+         * @codeCoverageIgnore
+         */
         public function fecharTicket($id){
             $sql = "UPDATE sac_web_api.ticket SET aberto = '0' WHERE ticket_id = ?";
 
@@ -96,7 +103,9 @@
 
             return $id;
         }
-
+        /**
+         * @codeCoverageIgnore
+         */
         public function excluirTicket($id){
             $sql = "DELETE FROM sac_web_api.ticket WHERE ticket_id = ?";
 
@@ -113,7 +122,9 @@
 
             return $id;         
         }
-
+        /**
+         * @codeCoverageIgnore
+         */
         public function getTickets(){
             $sql = "SELECT
                         ticket_id TicketId,

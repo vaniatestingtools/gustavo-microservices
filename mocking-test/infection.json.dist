@@ -2,9 +2,11 @@
     "timeout": 10,
     "source": {
         "directories": [
-            "DataAccess"
+            "DataAccess",
+            "Controllers"
         ]
     },
+    "tmpDir": "./temp",
     "logs": {
         "text": "infection.log",
         "summary": "summary.log"
@@ -12,5 +14,6 @@
     "mutators": {
         "@default": true,
         "@function_signature": false
-    }
+    },
+    "testFramework": "phpunit"
 }

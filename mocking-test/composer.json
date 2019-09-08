@@ -1,9 +1,9 @@
 {
     "autoload": {
 	"classmap": [
-		"ControllerTest.php",
+		"tests/ControllerTest.php",
         "Controllers/Controller.php",
-        "DataAccess/DataAccessTest.php",
+        "tests/DataAccessTest.php",
         "DataAccess/DataAccess.php"
 	]
     },
