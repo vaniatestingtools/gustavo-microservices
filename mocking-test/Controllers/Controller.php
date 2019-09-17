@@ -36,7 +36,7 @@
 				return;
 			}
 
-			$this->dataAccess->abrirTicket($ticket);
+			return $this->dataAccess->abrirTicket($ticket);
         }
 		
 		/**

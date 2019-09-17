@@ -1,15 +1,15 @@
 {
     "autoload": {
-	"classmap": [
-		"tests/ControllerTest.php",
-        "Controllers/Controller.php",
-        "tests/DataAccessTest.php",
-        "DataAccess/DataAccess.php"
-	]
+        "classmap": [
+            "tests/ControllerTest.php",
+            "Controllers/Controller.php",
+            "tests/DataAccessTest.php",
+            "DataAccess/DataAccess.php"
+        ]
     },
     "require-dev": {
-	"phpunit/phpcov": "^6.0",
-        "mockery/mockery": "dev-master"
+	    "phpunit/phpcov": "^6.0",
+        "mockery/mockery": "@stable"
     },
     "require": {
         "infection/infection": "^0.13.5"
